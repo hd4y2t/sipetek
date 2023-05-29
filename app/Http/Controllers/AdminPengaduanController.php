@@ -22,7 +22,7 @@ class AdminPengaduanController extends Controller
     public function index()
     {
         return view('dashboards.admins.pengaduans.index', [
-            'pengaduans' => Pengaduan::with(['author', 'perusahaan', 'perihal'])->filter(request(['search']))->orderBy('id', 'desc')->paginate(10)->withQueryString()
+            'pengaduans' => Pengaduan::with(['author', 'perihal'])->filter(request(['search']))->orderBy('id', 'desc')->paginate(10)->withQueryString()
         ]);
     }
 
@@ -44,7 +44,16 @@ class AdminPengaduanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'perihal' => 'required',
+            'subjek' => 'required',
+            'body' => 'required',
+            'image' => 'required',
+            'status' => 'required',
+        ]);
+
+        Pengaduan::create($validatedData);
+        return redirect('admin/perizinan')->with('success', 'Perizinan berhasil ditambahkan!');
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('meta-csrf')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('title', 'Pengaduan | SI Pengaduan Tenaga Kerja')

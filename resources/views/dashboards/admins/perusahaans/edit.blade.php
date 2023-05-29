@@ -47,7 +47,7 @@
                         <div class="col-md-6">
                             <div class="mb-3 position-relative" id="datepicker2">
                                 <label for="tanggal_berdiri" class="form-label">Tanggal Berdiri</label>
-                                <input type="text" class="form-control" name="tanggal_berdiri" id="tanggal_berdiri" data-provide="datepicker" data-date-format="d M yyyy" data-date-container="#datepicker2" 
+                                <input type="text" class="form-control" name="tanggal_berdiri" id="tanggal_berdiri" data-provide="datepicker" data-date-format="d M yyyy" data-date-container="#datepicker2"
                                 {{-- @if ($perusahaan->tanggal_berdiri == NULL) --}}
                                     {{-- value="{{ $perusahaan->tanggal_berdiri }}" --}}
                                 {{-- @else --}}
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     {{-- Provinsi dan Kabupaten End --}}
-         
+
                     {{-- Kecamatan & Kelurahan --}}
                     <div class="row">
                         <div class="col-md-6">
@@ -192,7 +192,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <span class="form-text text-muted"><small>Example: Subang, 16 Januari 1998</small></span>
+                                <span class="form-text text-muted"><small>Example: Pa, 16 Januari 1998</small></span>
                             </div>
                         </div>
                     </div>
@@ -452,6 +452,6 @@
         $('#select_district').on('select2:clear', function(e) {
             $("#select_village").select2();
         });
-    });   
+    });
 </script>
 @endsection

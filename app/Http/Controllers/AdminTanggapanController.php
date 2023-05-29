@@ -16,7 +16,7 @@ class AdminTanggapanController extends Controller
      */
     public function index()
     {
-        // 
+        //
     }
 
     /**
@@ -37,7 +37,7 @@ class AdminTanggapanController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         Pengaduan::where('id', $request->pengaduan_id)->update([
             'status' => 'Selesai'
         ]);
@@ -48,7 +48,7 @@ class AdminTanggapanController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('tanggapan-images');
+            $validatedData['image'] = $request->file('image')->store('public/tanggapan-images');
         }
 
         $user_id = Auth::user()->id;

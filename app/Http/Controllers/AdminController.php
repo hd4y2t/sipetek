@@ -17,10 +17,9 @@ class AdminController extends Controller
             'pengaduan' => Pengaduan::count(),
             'pending' => Pengaduan::where('status', 'Pending')->count(),
             'proses' => Pengaduan::where('status', 'Proses')->count(),
-            'selesai' => Pengaduan::where('status', 'Selesai')->count(),
-            'perusahaan' => Perusahaan::count(),
-        ]);
-        
+            'selesai' => Pengaduan::where('status', 'Selesai')->count()
+                ]);
+
     }
 
     public function profile()

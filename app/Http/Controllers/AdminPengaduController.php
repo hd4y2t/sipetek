@@ -50,7 +50,7 @@ class AdminPengaduController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        
+
         return view('dashboards.admins.pengadu.detail', [
             'user' => $user
         ]);

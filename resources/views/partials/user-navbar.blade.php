@@ -12,10 +12,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Left Menu Start-->
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Info Perizinan</a></li>
+                    {{-- <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Home</a></li> --}}
+                    {{-- <li class="nav-item mx-lg-1"><a class="nav-link" href="#perizinan">Info
+                            Perizinan</a></li>
                     <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Info Non Perizinan</a></li>
-                    <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Info Layanan Mobil Jenazah</a></li>
+                    <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Info Layanan Mobil Jenazah</a></li> --}}
                     {{-- <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Contact</a></li> --}}
                 </ul>
                 <!-- Left Menu End -->
@@ -53,7 +54,7 @@
                         <li class="nav-item me-0">
                             <a href="{{ route('login') }}"
                                 class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex"> <i
-                                    class="mdi mdi-login me-2"></i> Sign In </a>
+                                    class="mdi mdi-login me-2"></i>Login </a>
                         </li>
                     @endauth
                 </ul>

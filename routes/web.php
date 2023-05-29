@@ -1,27 +1,36 @@
 <?php
 
+use App\Models\User;
+use App\Models\Mobil;
 use App\Models\Perihal;
-use App\Models\Perusahaan;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Models\Pengaduan;
 
+use App\Models\Perizinan;
+use App\Models\Perusahaan;
+use App\Models\Non_Perizinan;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengaduanController;
 
+use App\Http\Controllers\AdminMobilController;
 use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\AdminPengaduController;
+
 use App\Http\Controllers\AdminPerihalController;
 use App\Http\Controllers\AdminRegencyController;
 use App\Http\Controllers\AdminVillageController;
-
 use App\Http\Controllers\AdminDistrictController;
 use App\Http\Controllers\AdminProvinceController;
 use App\Http\Controllers\AdminPengaduanController;
-
+use App\Http\Controllers\AdminPerizinanController;
 use App\Http\Controllers\AdminTanggapanController;
 use App\Http\Controllers\AdminPerusahaanController;
+use App\Http\Controllers\AdminNonPerizinanController;
+
 // use App\Http\Controllers\HomeController;
 
 /*
@@ -36,7 +45,16 @@ use App\Http\Controllers\AdminPerusahaanController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',[
+        'perizinan' => Perizinan::all(),
+        'mobil' => Mobil::all(),
+        'non_perizinan' =>Non_Perizinan::all(),
+        'pengaduan' => Pengaduan::count(),
+        'pending' => Pengaduan::where('status', 'Pending')->count(),
+        'proses' => Pengaduan::where('status', 'Proses')->count(),
+        'selesai' => Pengaduan::where('status', 'Selesai')->count(),
+        'user' => User::where('role', '=', '2')->count(),
+        ]);
 });
 
 Route::middleware(['middleware'=>'PreventBackHistory'])->group(function () {
@@ -112,8 +130,17 @@ Route::prefix('admin')->middleware(['isAdmin','auth','PreventBackHistory'])->gro
     Route::get('villages/checkSlug', [AdminVillageController::class, 'checkSlug']);
     Route::resource('villages', AdminVillageController::class);
 
-    Route::get('perusahaans/checkSlug', [AdminPerusahaanController::class, 'checkSlug']);
-    Route::resource('perusahaans', AdminPerusahaanController::class);
+    // Route::get('perusahaans/checkSlug', [AdminPerusahaanController::class, 'checkSlug']);
+    // Route::resource('perusahaans', AdminPerusahaanController::class);
+
+    Route::get('perizinan/id', [AdminPerizinanController::class, 'id']);
+    Route::resource('perizinan', AdminPerizinanController::class);
+
+    Route::get('non_perizinan/id', [AdminNonPerizinanController::class, 'id']);
+    Route::resource('non_perizinan', AdminNonPerizinanController::class);
+
+    Route::get('mobil/id', [AdminMobilController::class, 'id']);
+    Route::resource('mobil', AdminMobilController::class);
 
     Route::resource('pengadu', AdminPengaduController::class);
 
@@ -142,8 +169,8 @@ Route::prefix('/')->middleware(['isUser','auth','PreventBackHistory'])->group(fu
     Route::get('pengaduans/checkSlug', [PengaduanController::class, 'checkSlug']);
     Route::resource('pengaduans', PengaduanController::class);
 
-    // Route::get('pengaduans', [PengaduanController::class, 'index']);
-    // Route::get('pengaduans/{pengaduan:slug}', [PengaduanController::class, 'show']);
+    Route::get('pengaduans', [PengaduanController::class, 'index']);
+    Route::get('pengaduans/{pengaduan:slug}', [PengaduanController::class, 'show']);
 
     Route::get('perusahaans/{perusahaan:slug}', function(Perusahaan $perusahaan){
         return view('dashboards.users.perusahaans.index', [

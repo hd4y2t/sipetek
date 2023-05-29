@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+// use Clockwork\Support\Lumen\Controller;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 // use Auth;
 
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
     {
         return view('dashboards.users.profile');
     }
-    
+
     public function settings()
     {
         return view('dashboards.users.settings');
@@ -27,7 +28,7 @@ class UserController extends Controller
 
     public function updateInfo(Request $request)
     {
-        $validator = \Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'nik' => 'required|regex:/^([0-9]*)$/|min:16|max:16|unique:users,nik,'.Auth::user()->id,
             'name' => 'required|string|max:255',
             'bio' => 'required',
@@ -38,7 +39,7 @@ class UserController extends Controller
             'email' => 'required|string|email:dns|max:255|unique:users,email,'.Auth::user()->id,
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15|unique:users,phone,'.Auth::user()->id,
 
-            
+
         ]);
 
         if ($validator->fails()) {

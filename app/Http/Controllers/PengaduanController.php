@@ -48,7 +48,6 @@ class PengaduanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'perusahaan_id' => 'required',
             'perihal_id' => 'required',
             'subjek' => 'required|max:255',
             'slug' => 'required|unique:pengaduans',
@@ -57,7 +56,7 @@ class PengaduanController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('pengaduan-images');
+            $validatedData['image'] = $request->file('image')->store('public/pengaduan-images');
         }
 
         $validatedData['user_id'] = auth()->user()->id;
@@ -79,7 +78,6 @@ class PengaduanController extends Controller
         $tanggapan = Tanggapan::where('pengaduan_id', $pengaduan)->first();
         return view('dashboards.users.pengaduans.detail', [
             'pengaduan' => $pengaduan,
-            'perusahaans' => Perusahaan::all(),
             'perihals' => Perihal::all(),
             'tanggapans' => $tanggapan
         ]);
@@ -96,7 +94,6 @@ class PengaduanController extends Controller
         if ($pengaduan->status == 'Pending') {
             return view('dashboards.users.pengaduans.edit',[
                 'pengaduan' => $pengaduan,
-                'perusahaans' => Perusahaan::all(),
                 'perihals' => Perihal::all()
             ]);
         }
@@ -113,7 +110,6 @@ class PengaduanController extends Controller
     public function update(Request $request, Pengaduan $pengaduan)
     {
         $rules = [
-            'perusahaan_id' => 'required',
             'perihal_id' => 'required',
             'subjek' => 'required|max:255',
             'body' => 'required',
@@ -130,7 +126,7 @@ class PengaduanController extends Controller
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validatedData['image'] = $request->file('image')->store('pengaduan-images');
+            $validatedData['image'] = $request->file('image')->store('public/pengaduan-images');
         }
 
         $validatedData['user_id'] = auth()->user()->id;

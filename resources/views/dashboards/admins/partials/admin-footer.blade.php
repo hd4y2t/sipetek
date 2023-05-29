@@ -6,7 +6,7 @@
                 <script>
                     document.write(new Date().getFullYear());
                 </script>
-                Copyright <b>Iik Hikmatulloh.</b> <i class="bx bxs-heart text-danger"></i> All Rights Reserved
+                Copyright <i class="bx bxs-heart text-danger"></i> All Rights Reserved
             </div>
         </div>
     </div>
